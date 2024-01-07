@@ -23,6 +23,9 @@ export class PostsComponent implements OnInit {
   postSelected: Post|null = null;
   filter: string = '';
 
+  /**
+   * This function open a modal to create a post
+   */
   createNewPost() {
     this.displayModal = true;
   }
@@ -49,6 +52,9 @@ export class PostsComponent implements OnInit {
     );
   }
 
+  /**
+   * This function is used to filter all post by a variable
+   */
   filterPosts() {
     return this.posts.filter(post =>
       post.title.toLowerCase().includes(this.filter.toLowerCase())
@@ -66,12 +72,19 @@ export class PostsComponent implements OnInit {
     );
   }
 
+  /**
+   * This function display a modal to edit a post
+   */
   editPost(post: Post){
     this.postSelected = post;
     this.isEditPost = true;
     this.displayModal = true;
   }
 
+  /**
+   * This function is used to like a post
+   * @param id
+   */
   likePost(id: number){
     this.postService.likePost(id).subscribe(
       (response) => {

@@ -37,6 +37,10 @@ export class PostService {
     return this.http.delete<Affect>(`${this.url}/posts/${id}`, { headers: this.headers });
   }
 
+  /**
+   * This function is used to liked a post
+   * @param id
+   */
   likePost(id: number): Observable<Affect>{
     return this.http.patch<Affect>(`${this.url}/posts/like/${id}`, {}, { headers: this.headers });
   }
