@@ -1,0 +1,7 @@
+.scroll-container {
+  margin-top: 2%;
+  max-width: 100%; /* Ajusta el ancho según tus necesidades */
+  max-height: 80vh; /* Ajusta la altura según tus necesidades */
+  overflow-x: auto; /* Barra de desplazamiento horizontal cuando sea necesario */
+  overflow-y: auto; /* Barra de desplazamiento vertical cuando sea necesario */
+}

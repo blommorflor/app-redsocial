@@ -1,0 +1,67 @@
+<!-- login.component.html -->
+<div class="min-h-screen flex items-center justify-center bg-gray-100">
+  <div class="bg-white p-8 rounded shadow-md w-96">
+    <h2 class="text-2xl font-bold mb-4">{{ !isRegister ? 'Iniciar Sesión' : 'Registrar usuario'}}</h2>
+
+    @if (!isRegister) {
+    <form [formGroup]="profileForm">
+      <div class="mb-4">
+        <label for="username" class="block text-gray-600 text-sm font-semibold mb-2">Email</label>
+        <input type="text" id="username" name="username" class="w-full p-2 border border-gray-300 rounded"
+          formControlName="email">
+      </div>
+
+      <div class="mb-4">
+        <label for="password" class="block text-gray-600 text-sm font-semibold mb-2">Contraseña</label>
+        <input type="password" id="password" name="password" class="w-full p-2 border border-gray-300 rounded"
+          formControlName="password">
+      </div>
+
+      <button type="submit" class="bg-purple-500 text-white p-2 rounded hover:bg-purple-600 w-full" (click)="login()"
+        [disabled]="!profileForm.valid">Iniciar Sesión</button>
+    </form>
+    <div class="w-full flex justify-center mt-2 text-purple-600">
+      <button (click)="isRegister = !isRegister">Registrarse</button>
+    </div>
+    }
+    @else {
+      <form [formGroup]="registerProfileForm">
+        <div class="mb-4">
+          <label for="fullName" class="block text-gray-600 text-sm font-semibold mb-2">Nombres</label>
+          <input type="text" id="fullName" name="fullName" class="w-full p-2 border border-gray-300 rounded"
+            formControlName="fullName">
+        </div>
+
+        <div class="mb-4">
+          <label for="Age" class="block text-gray-600 text-sm font-semibold mb-2">Edad</label>
+          <input type="text" id="Age" name="Age" class="w-full p-2 border border-gray-300 rounded"
+            formControlName="age">
+        </div>
+
+        <div class="mb-4">
+          <label for="email" class="block text-gray-600 text-sm font-semibold mb-2">Email</label>
+          <input type="text" id="email" name="email" class="w-full p-2 border border-gray-300 rounded"
+            formControlName="email">
+        </div>
+
+        <div class="mb-4">
+          <label for="password" class="block text-gray-600 text-sm font-semibold mb-2">Contraseña</label>
+          <input type="password" id="password" name="password" class="w-full p-2 border border-gray-300 rounded"
+            formControlName="password">
+        </div>
+
+        <button type="submit" class="bg-purple-500 text-white p-2 rounded hover:bg-purple-600 w-full" (click)="register()"
+          [disabled]="!registerProfileForm.valid">Registrarse</button>
+      </form>
+      <div class="w-full flex justify-center mt-2 text-purple-600">
+        <button (click)="isRegister = !isRegister">Regresar</button>
+      </div>
+    }
+
+    @if (showAlert) {
+    <div class="w-full flex justify-center mt-2 text-{{colorAlert}}-600">
+      <p>{{ textAlert }}</p>
+    </div>
+    }
+  </div>
+</div>

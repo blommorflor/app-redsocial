@@ -1,0 +1,70 @@
+<div class="flex flex-row">
+  <div class="basis-10/12 mr-4">
+    <input type="text" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-purple-500"
+      placeholder="Filtrar publicaciones" [(ngModel)]="filter">
+  </div>
+  <div class="basis-2/12">
+    <button
+      class="bg-purple-500 text-white px-4 py-2 rounded-md hover:bg-purple-600 focus:outline-none focus:ring focus:border-purple-300 w-full"
+      (click)="createNewPost()">
+      Crear post</button>
+  </div>
+</div>
+<div class="scroll-container">
+  @for (post of filterPosts(); track post.id) {
+
+  <div class="flex flex-col mt-5" style="max-width: 80vw;">
+    <div class="mt-3 mb-3 bg-purple-50 rounded-md overflow-hidden shadow-md w-full">
+      <div class="p-4">
+        <div class="mb-4">
+          <div class="flex justify-between">
+            <div class="flex">
+              <h2 class="text-xl font-semibold">{{ post.title }}</h2>
+              <small class="text-gray-600 mt-2 ml-2">
+                {{ (post.createdAt | date:'yyyy-MM-dd HH:mm:ss') != (post.updatedAt | date:'yyyy-MM-dd HH:mm:ss') ?
+                'Editado' : '' }}
+              </small>
+            </div>
+            <div>
+              <button class="mr-2" (click)="likePost(post?.id ?? 0)">
+                <span class="material-symbols-outlined" style="color: rgb(122, 60, 122);">
+                  thumb_up
+                </span>
+              </button>
+              @if (userId == post.user?.id) {
+
+              <button class="mr-2" (click)="editPost(post)">
+                <span class="material-symbols-outlined" style="color: rgb(58, 147, 231);">
+                  edit
+                </span>
+              </button>
+
+              <button (click)="deletePost(post.id ?? 0)">
+                <span class="material-symbols-outlined" style="color: rgb(175, 51, 51);">
+                  delete
+                </span>
+              </button>
+              }
+            </div>
+          </div>
+
+          <p class="text-gray-600 mt-1">Por {{ post.user?.fullName }} el {{ post.createdAt | date:'yyyy-MM-dd' }} a las
+            {{
+            post.createdAt | date: 'HH:mm:ss' }}</p>
+        </div>
+
+        <div class="flex justify-between">
+          <p class="text-gray-800">{{ post.content }}</p>
+          <p class="text-gray-500">likes: {{ post.likes }}</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  }@empty {
+  No hay publicaciones
+  }
+</div>
+<app-post-edit-create (closeModalEvent)="closeModalPost()" [displayModal]="displayModal" [isEdit]="isEditPost"
+  [dataPost]="postSelected" />
